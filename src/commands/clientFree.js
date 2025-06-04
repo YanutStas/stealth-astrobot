@@ -30,8 +30,8 @@ module.exports = (bot) => {
         `Куда заглянем?`,
       Markup.inlineKeyboard([
         [Markup.button.callback("🔮 Общая (бесплатно)", "natal_start")],
-        [Markup.button.callback("💞 Любовь (платно)", "love_start")],
-        [Markup.button.callback("💼 Карьера (платно)", "career_start")],
+        [Markup.button.callback("💞 Любовь (платно) ПОКА ХУЁВО РАБОТАЕТ", "love_start")],
+        [Markup.button.callback("💼 Карьера (платно) ПОКА ХУЁВО РАБОТАЕТ", "career_start")],
         [Markup.button.callback("❤️ Совместимость (платно)", "compat_start")],
       ])
     );
