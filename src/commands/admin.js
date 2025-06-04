@@ -11,14 +11,7 @@ module.exports = (bot) => {
     await ctx.answerCbQuery("Оплата подтверждена ✔️");
 
     // 👉 пишем лог
-    logger.info(
-      {
-        action: "grant_ok",
-        targetId: userId,
-        at: DateTime.local().setZone("Europe/Moscow").toISO(),
-      },
-      "✅ Админ подтвердил оплату"
-    );
+    logger.info(`✅ Оплата подтверждена для @${userId}`);
 
     // сообщение пользователю
     await bot.telegram.sendMessage(
@@ -43,14 +36,7 @@ module.exports = (bot) => {
     await ctx.answerCbQuery("Оплата НЕ подтверждена");
 
     // лог
-    logger.info(
-      {
-        action: "grant_no",
-        targetId: userId,
-        at: DateTime.local().setZone("Europe/Moscow").toISO(),
-      },
-      "❌ Админ отклонил чек"
-    );
+    logger.info(`❌ Оплата отклонена для @${userId}`);
 
     // пользователю
     await bot.telegram.sendMessage(

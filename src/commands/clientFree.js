@@ -28,12 +28,7 @@ module.exports = (bot) => {
     ctx.reply(
       "Выберите, что нужно:",
       Markup.inlineKeyboard([
-        [
-          Markup.button.callback(
-            "🔮 Общая (бесплатно)",
-            "natal_start"
-          ),
-        ],
+        [Markup.button.callback("🔮 Общая (бесплатно)", "natal_start")],
         [Markup.button.callback("❤️ Совместимость (платно)", "compat_start")],
       ])
     );
@@ -54,15 +49,7 @@ module.exports = (bot) => {
     const tsStart = Date.now();
     const { id, username, first_name, last_name } = ctx.from;
 
-    logger.info(
-      {
-        userId: id,
-        user: username || `${first_name || ""} ${last_name || ""}`.trim(),
-        text: ctx.message.text,
-        at: DateTime.local().toISO(),
-      },
-      "📥 Запрос натальной карты"
-    );
+    logger.info(`📥 @${username || id}: ${ctx.message.text}`);
 
     await ctx.reply("🔭 Составляю карту звёзд...");
 
@@ -115,8 +102,7 @@ module.exports = (bot) => {
         await ctx.reply(out);
 
         logger.info(
-          { userId: id, model, ms: Date.now() - tsStart },
-          "📤 Ответ отправлен"
+          `📤 @${username || id}: ${model} | ${Date.now() - tsStart} мс`
         );
 
         sent = true;
