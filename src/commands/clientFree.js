@@ -28,7 +28,7 @@ module.exports = (bot) => {
     ctx.reply(
       "Выберите, что нужно:",
       Markup.inlineKeyboard([
-        [Markup.button.callback("🔮 Общая (бесплатно) ПРОВЕРКА НОВОГО ПУША", "natal_start")],
+        [Markup.button.callback("🔮 Общая (бесплатно) ПРОВЕРКА НОВОГО ПУША!!!", "natal_start")],
         [Markup.button.callback("❤️ Совместимость (платно)", "compat_start")],
       ])
     );
