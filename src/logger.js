@@ -3,6 +3,7 @@ const pino = require("pino");
 
 const prettyOpts = {
   translateTime: "SYS:dd.MM.yyyy HH:mm:ss",
+  translateTime: "SYS:dd.MM.yyyy HH:mm:ss",
   ignore: "pid,hostname,level",
   colorize: true,
   messageFormat: "{msg}", // в выводе останется только msg
