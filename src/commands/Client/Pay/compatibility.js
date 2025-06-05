@@ -1,6 +1,6 @@
 const { Markup } = require("telegraf");
 const axios = require("axios");
-const logger = require("../../logger");
+const logger = require("../../../logger");
 
 module.exports = (bot, flowMap) => {
   const feature = "compat"; // ← меняем в других файлах
