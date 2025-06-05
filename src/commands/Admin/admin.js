@@ -22,21 +22,35 @@ module.exports = (bot) => {
     await ctx.forwardMessage(ADMIN_ID);
 
     // далее — подпись + кнопки
-    await bot.telegram.sendMessage(
-      ADMIN_ID,
-      `🧾 Оплата за *${srv}* от @${user.username || "неизвестен"} (ID: ${
-        user.id
-      })`,
-      {
-        parse_mode: "Markdown",
-        ...Markup.inlineKeyboard([
-          [
-            Markup.button.callback("✔️ Подтвердить", `grant_ok_${user.id}`),
-            Markup.button.callback("✖️ Отклонить", `grant_no_${user.id}`),
-          ],
-        ]),
-      }
-    );
+    // await bot.telegram.sendMessage(
+    //   ADMIN_ID,
+    //   `🧾 Оплата за *${srv}* от @${user.username || "неизвестен"} (ID: ${
+    //     user.id
+    //   })`,
+    //   {
+    //     parse_mode: "Markdown",
+    //     ...Markup.inlineKeyboard([
+    //       [
+    //         Markup.button.callback("✔️ Подтвердить", `grant_ok_${user.id}`),
+    //         Markup.button.callback("✖️ Отклонить", `grant_no_${user.id}`),
+    //       ],
+    //     ]),
+    //   }
+    // );
+
+    const text =
+      `🧾 Оплата за <b>${srv}</b> от ` +
+      (user.username ? `@${user.username}` : `ID&nbsp;<code>${user.id}</code>`);
+
+    await bot.telegram.sendMessage(ADMIN_ID, text, {
+      parse_mode: "HTML", // HTML-режим проще: &nbsp; <b> <code>
+      ...Markup.inlineKeyboard([
+        [
+          Markup.button.callback("✔️ Подтвердить", `grant_ok_${user.id}`),
+          Markup.button.callback("✖️ Отклонить", `grant_no_${user.id}`),
+        ],
+      ]),
+    });
   });
 
   /* ---------- админ: подтвердить ---------- */
