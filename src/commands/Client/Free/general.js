@@ -1,7 +1,7 @@
 const axios = require("axios");
 const { DateTime } = require("luxon");
 const { Markup } = require("telegraf");
-const logger = require("../../logger");
+const logger = require("../../../logger");
 
 // валидный шаблон одной карты
 const natalReg = /^\d{2}\.\d{2}\.\d{4}\s+\d{2}:\d{2}\s+.+$/;
