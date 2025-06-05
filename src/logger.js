@@ -3,10 +3,8 @@ const pino = require("pino");
 
 const prettyOpts = {
   translateTime: "SYS:dd.MM.yyyy HH:mm:ss",
-  translateTime: "SYS:dd.MM.yyyy HH:mm:ss",
-  ignore: "pid,hostname,level",
-  colorize: true,
-  messageFormat: "{msg}", // в выводе останется только msg
+  ignore: "hostname,level",
+  messageFormat: "{msg}",
 };
 
 let logger;
@@ -17,8 +15,8 @@ try {
   });
   logger = pino({ level: "info" }, transport);
 } catch {
-  // fallback на JSON, если pino-pretty вдруг исчезнет
   logger = pino({ level: "info" });
+  logger.warn("pino-pretty не найден — логи будут в JSON");
 }
 
 module.exports = logger;

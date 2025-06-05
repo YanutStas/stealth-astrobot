@@ -1,19 +1,26 @@
 // // входная точка приложения
 require("dotenv").config();
 const { Telegraf } = require("telegraf");
+const logger = require("./src/logger");
 
 const bot = new Telegraf(process.env.BOT_TOKEN);
+const flow = new Map(); // userId → 'compat' | 'love' | 'career'
 
-// 👉 подключаем команды
-require("./src/commands/clientFree")(bot);
-require("./src/commands/clientPay")(bot);
-require("./src/commands/admin")(bot);
+// ─── подключаем модули (передаём bot и карту flow) ──────────────────
+require("./src/commands/startCommands")(bot);
+require("./src/commands/Admin/admin")(bot, flow);
 
-// ── запуск
+require("./src/commands/Client/Free/general")(bot);
+require("./src/commands/Client/Pay/compatibility")(bot, flow);
+require("./src/commands/Client/Pay/career")(bot, flow);
+require("./src/commands/Client/Pay/love")(bot, flow);
+// ─────────────────────────────────────────────────────────────────────
+
 bot.launch();
-
 process.once("SIGINT", () => bot.stop("SIGINT"));
 process.once("SIGTERM", () => bot.stop("SIGTERM"));
+
+logger.info("🤖 Bot started");
 
 // require("dotenv").config();
 // const { Telegraf } = require("telegraf");
