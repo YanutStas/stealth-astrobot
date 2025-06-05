@@ -1,6 +1,7 @@
 const { Markup } = require("telegraf");
 const axios = require("axios");
 const logger = require("../../../logger");
+const pending = require("../../pendingStore");
 
 module.exports = (bot, flowMap) => {
   const feature = "love";
@@ -11,10 +12,11 @@ module.exports = (bot, flowMap) => {
   bot.action("love_start", async (ctx) => {
     await ctx.answerCbQuery();
     flowMap.set(ctx.from.id, feature);
+    pending.set(ctx.from.id, niceFeature);
 
     ctx.reply(
-      `💳 Для получения *${niceFeature}* переведи 10 ₽ на карту:\n` +
-        "2202 2006 1234 5678\n\n" +
+      `💳 Для получения *${niceFeature}* переведи 50 ₽ на карту:\n` +
+        "2200700977607737\n\n" +
         "Затем пришли сюда скриншот или чек 👇",
       { parse_mode: "Markdown" }
     );
